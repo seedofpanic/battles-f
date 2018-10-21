@@ -1,21 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    ws = new WebSocket("ws://localhost:3003/ws");
+
+    componentDidMount() {
+
+        this.ws.onmessage = msg => {
+            console.log(msg);
+        };
+
+        this.ws.onopen = () => {
+            this.doAction('info');
+        };
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <button onClick={() => this.startBattle()}>Start battle</button>
+            </div>
+        );
+    }
+
+    startBattle() {
+        this.doAction('start');
+    }
+
+    doAction(action, payload) {
+        this.ws.send(JSON.stringify({action, payload}));
+    }
 }
 
 export default App;
