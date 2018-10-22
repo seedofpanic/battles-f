@@ -14,7 +14,7 @@ function showNote(state, action) {
         ...state,
         notes: [
             ...state.notes,
-            action.payload
+            typeof action.payload !== 'string' ? JSON.stringify(action.payload) : action.payload
         ]
     };
 }
