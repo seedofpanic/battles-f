@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import './App.css';
 import {connect} from 'react-redux';
 import {NotesComponent} from './components/Notes/NotesComponent';
 import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
 import {WSService} from './WSService';
 import {startBattleAction} from './store/actions/startBattleAction';
 import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponent';
+import {SelectedCharacterComponent} from './components/SelectedCharacter/SelectedCharacterComponent';
+import style from './App.css';
 
 class App extends Component {
 
@@ -15,7 +16,17 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className={style.App}>
+                <div className={style.me}>
+                    {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
+                        <SelectedCharacterComponent character={this.props.game.characters[this.props.game.myId]}/>
+                        : ''}
+                </div>
+                <div className={style.opponent}>
+                    {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
+                        <SelectedCharacterComponent character={this.props.game.characters[this.props.game.opponentId]}/>
+                        : ''}
+                </div>
                 <button onClick={() => this.startBattle()}>Start battle</button>
                 {this.props.game.characters_select
                     ? <CharactersSelectComponent characters={this.props.game.characters_select}/>

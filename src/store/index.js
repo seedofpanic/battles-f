@@ -7,7 +7,10 @@ export const store = createStore(createReducer({
 }, {
     note: showNote,
     select_character: selectCharacter,
-    select_skill: selectSkill
+    select_skill: selectSkill,
+    character_update: characterUpdate,
+    set_my_id: setMyId,
+    set_opponent_id: setOpponentId
 }));
 
 function selectSkill(state, {payload}) {
@@ -18,6 +21,46 @@ function selectSkill(state, {payload}) {
             skill_select: payload
         }
     };
+}
+
+function setMyId(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            myId: payload
+        }
+    }
+}
+
+function setOpponentId(state, {payload}) {
+    if (state.game.myId === payload) {
+        return state;
+    }
+
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            opponentId: payload
+        }
+    }
+}
+
+function characterUpdate(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            characters: {
+                ...state.game.characters,
+                [payload.id]: {
+                    ...(state.game.characters || {[payload.id]: {}})[payload.id],
+                    ...payload.data
+                }
+            }
+        }
+    }
 }
 
 function showNote(state, {payload}) {
