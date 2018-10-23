@@ -44,7 +44,7 @@ jobs:
 
                       ssh ${HOST_NAME} "cd ${HOST_DIR};git pull"
                       ssh ${HOST_NAME} "cd ${HOST_DIR};npm i"
-                      ssh ${HOST_NAME} "cp ${HOST_DIR}/build/* ${PUBLIC_DIR}"
+                      ssh ${HOST_NAME} "cp -r ${HOST_DIR}/build/* ${PUBLIC_DIR}"
                     fi
 
 
