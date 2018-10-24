@@ -4,7 +4,7 @@ export class WSService {
     static ws;
 
     static init() {
-        this.ws = new WebSocket("ws://localhost:3003/ws");
+        this.ws = new WebSocket(`ws://${process.env.REACT_APP_WS_URL}/ws`);
 
         this.ws.onmessage = msg => {
             store.dispatch(JSON.parse(msg.data));
