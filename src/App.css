@@ -13,3 +13,14 @@
   right: 0;
   top: 0;
 }
+
+:local(.startButton) {
+  background-color: transparent;
+  border: solid 4px white;
+  border-radius: 0;
+  color: white;
+  font-size: 42px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}

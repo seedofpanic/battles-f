@@ -6,7 +6,7 @@ export class SelectedCharacterComponent extends React.Component {
 
         return <div>
             <div>{character.name}</div>
-            <div>{character.health}/{character.healthMax}</div>
+            <div>{character.health.toFixed(2)}/{character.healthMax.toFixed(2)}</div>
         </div>;
     }
 }

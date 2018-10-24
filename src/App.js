@@ -27,7 +27,10 @@ class App extends Component {
                         <SelectedCharacterComponent character={this.props.game.characters[this.props.game.opponentId]}/>
                         : ''}
                 </div>
-                <button onClick={() => this.startBattle()}>Start battle</button>
+                {this.props.inBattle ?
+                    '' :
+                    <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
+                }
                 {this.props.game.characters_select
                     ? <CharactersSelectComponent characters={this.props.game.characters_select}/>
                     : ''

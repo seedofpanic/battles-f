@@ -1,16 +1,21 @@
 import { createReducer } from 'redux-create-reducer';
 import { createStore } from 'redux';
 
+const initGame = {};
+
 export const store = createStore(createReducer({
     notes: [],
-    game: {}
+    game: {
+        ...initGame
+    }
 }, {
     note: showNote,
     select_character: selectCharacter,
     select_skill: selectSkill,
     character_update: characterUpdate,
     set_my_id: setMyId,
-    set_opponent_id: setOpponentId
+    set_opponent_id: setOpponentId,
+    set_in_battle: setInBattle
 }));
 
 function selectSkill(state, {payload}) {
@@ -81,4 +86,21 @@ function selectCharacter(state, {payload}) {
             characters_select: payload
         }
     };
+}
+
+function setInBattle(state, {payload}) {
+    if (payload) {
+        return {
+            ...state,
+            inBattle: true
+        }
+    } else {
+        return {
+            ...state,
+            inBattle: false,
+            game: {
+                ...initGame
+            }
+        }
+    }
 }
