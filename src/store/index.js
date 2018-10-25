@@ -72,8 +72,8 @@ function showNote(state, {payload}) {
     return {
         ...state,
         notes: [
-            ...state.notes,
-            typeof payload !== 'string' ? JSON.stringify(payload) : payload
+            typeof payload !== 'string' ? JSON.stringify(payload) : payload,
+            ...state.notes
         ]
     };
 }
