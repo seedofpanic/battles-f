@@ -11,8 +11,8 @@ const popupComponents = {
 
 export class Popups extends React.Component {
     render() {
-        return this.props.popups.map(popup =>
-            <div className={style.popup}>
+        return this.props.popups.map((popup, index) =>
+            <div className={style.popup} key={index}>
                 <Provider store={store}>
                     {React.createElement(
                         connect(state => popup.mappings(state) || state)(popupComponents[popup.component])

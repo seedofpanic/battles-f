@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NotesComponent} from './components/Notes/NotesComponent';
-import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
 import {WSService} from './WSService';
 import {startBattleAction} from './store/actions/startBattleAction';
 import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponent';
-import {SelectedCharacterComponent} from './components/SelectedCharacter/SelectedCharacterComponent';
 import style from './App.css';
 import {Popups} from './components/Popups/Popups';
+import {CharacterInfoComponent} from './components/CharacterInfo/CharacterInfoComponent';
 
 class App extends Component {
 
@@ -21,12 +20,12 @@ class App extends Component {
                 <h2 className={style.label}>Pre alpha v0.3</h2>
                 <div className={style.me}>
                     {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
-                        <SelectedCharacterComponent character={this.props.game.characters[this.props.game.myId]}/>
+                        <CharacterInfoComponent character={this.props.game.characters[this.props.game.myId]}/>
                         : ''}
                 </div>
                 <div className={style.opponent}>
                     {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
-                        <SelectedCharacterComponent character={this.props.game.characters[this.props.game.opponentId]}/>
+                        <CharacterInfoComponent character={this.props.game.characters[this.props.game.opponentId]}/>
                         : ''}
                 </div>
                 {this.props.inBattle ?

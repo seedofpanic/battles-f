@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class SelectedCharacterComponent extends React.Component {
+export class CharacterInfoComponent extends React.Component {
     render() {
         const character = this.props.character;
 
