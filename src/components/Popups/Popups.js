@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
 import {Provider} from 'react-redux';
 import style from './Popups.css';
 import {CharactersSelectComponent} from '../CharactersSelect/CharactersSelectComponent';
