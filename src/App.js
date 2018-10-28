@@ -7,6 +7,7 @@ import {startBattleAction} from './store/actions/startBattleAction';
 import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponent';
 import {SelectedCharacterComponent} from './components/SelectedCharacter/SelectedCharacterComponent';
 import style from './App.css';
+import {Popups} from './components/Popups/Popups';
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
     render() {
         return (
             <div className={style.App}>
+                <h2 className={style.label}>Pre alpha v0.3</h2>
                 <div className={style.me}>
                     {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
                         <SelectedCharacterComponent character={this.props.game.characters[this.props.game.myId]}/>
@@ -31,15 +33,12 @@ class App extends Component {
                     '' :
                     <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
                 }
-                {this.props.game.characters_select
-                    ? <CharactersSelectComponent characters={this.props.game.characters_select}/>
-                    : ''
-                }
                 {this.props.game.skill_select
                     ? <SkillSelectComponent skills={this.props.game.skill_select}/>
                     : ''
                 }
                 <NotesComponent notes={this.props.notes}/>
+                <Popups popups={this.props.popups}/>
             </div>
         );
     }

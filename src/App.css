@@ -24,3 +24,11 @@
   margin-top: 20px;
   cursor: pointer;
 }
+
+:local(.label) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: red;
+  padding-right: 20px;
+}

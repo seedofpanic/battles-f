@@ -7,10 +7,12 @@ export const store = createStore(createReducer({
     notes: [],
     game: {
         ...initGame
-    }
+    },
+    popups: []
 }, {
     note: showNote,
     select_character: selectCharacter,
+    hide_select_character: hideSelectCharacter,
     select_skill: selectSkill,
     character_update: characterUpdate,
     set_my_id: setMyId,
@@ -84,8 +86,24 @@ function selectCharacter(state, {payload}) {
         game: {
             ...state.game,
             characters_select: payload
-        }
+        },
+        popups: [
+            {
+                component: 'CharactersSelectComponent',
+                mappings: state => ({
+                    characters: state.game.characters_select
+                })
+            },
+            ...state.popups
+        ]
     };
+}
+
+function hideSelectCharacter(state) {
+    return {
+        ...state,
+        popups: state.popups.filter(popup => popup.component !== 'CharactersSelectComponent')
+    }
 }
 
 function setInBattle(state, {payload}) {
