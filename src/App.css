@@ -32,3 +32,28 @@
   color: red;
   padding-right: 20px;
 }
+
+:local(.arena) {
+  width: 100%;
+  height: 100%;
+}
+
+:local(.mySkillsSelect) {
+  position: absolute;
+  left: 0;
+  bottom: 200px;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 50px;
+}
+
+:local(.myLog) {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 180px;
+  padding: 0 50px;
+  box-sizing: border-box;
+  overflow: scroll;
+}

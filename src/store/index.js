@@ -89,13 +89,6 @@ function selectCharacter(state, {payload}) {
             characters_select: payload
         },
         popups: [
-            {
-                component: 'CharactersSelectComponent',
-                mappings: state => ({
-                    characters: state.game.characters_select,
-                    selectedId: state.game.selectedId
-                })
-            },
             ...state.popups
         ]
     };
@@ -104,7 +97,10 @@ function selectCharacter(state, {payload}) {
 function hideSelectCharacter(state) {
     return {
         ...state,
-        popups: state.popups.filter(popup => popup.component !== 'CharactersSelectComponent')
+        game: {
+            ...state.game,
+            characters_select: undefined
+        }
     }
 }
 

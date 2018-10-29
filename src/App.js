@@ -7,6 +7,7 @@ import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponen
 import style from './App.css';
 import {Popups} from './components/Popups/Popups';
 import {CharacterInfoComponent} from './components/CharacterInfo/CharacterInfoComponent';
+import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
 
 class App extends Component {
 
@@ -17,27 +18,36 @@ class App extends Component {
     render() {
         return (
             <div className={style.App}>
-                <h2 className={style.label}>Pre alpha v0.3</h2>
-                <div className={style.me}>
-                    {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
-                        <CharacterInfoComponent character={this.props.game.characters[this.props.game.myId]}/>
-                        : ''}
-                </div>
-                <div className={style.opponent}>
-                    {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
-                        <CharacterInfoComponent character={this.props.game.characters[this.props.game.opponentId]}/>
-                        : ''}
-                </div>
-                {this.props.inBattle ?
-                    '' :
-                    <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
+                {
+                    this.props.game.characters_select ?
+                        <CharactersSelectComponent characters={this.props.game.characters_select}
+                                                   selectedId={this.props.game.selectedId}/>
+                        : <div className={style.arena}>
+                            {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
+                                <CharacterInfoComponent position='left'
+                                                        character={this.props.game.characters[this.props.game.myId]}/>
+                                : ''}
+                            {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
+                                <CharacterInfoComponent position='right'
+                                                        character={this.props.game.characters[this.props.game.opponentId]}/>
+                                : ''}
+                            {this.props.inBattle ?
+                                '' :
+                                <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
+                            }
+                            <div className={style.mySkillsSelect}>
+                                {this.props.game.skill_select
+                                    ? <SkillSelectComponent skills={this.props.game.skill_select}/>
+                                    : ''
+                                }
+                            </div>
+                            <div className={style.myLog}>
+                                <NotesComponent notes={this.props.notes}/>
+                            </div>
+                        </div>
                 }
-                {this.props.game.skill_select
-                    ? <SkillSelectComponent skills={this.props.game.skill_select}/>
-                    : ''
-                }
-                <NotesComponent notes={this.props.notes}/>
                 <Popups popups={this.props.popups}/>
+                <h2 className={style.label}>Pre alpha v0.3</h2>
             </div>
         );
     }

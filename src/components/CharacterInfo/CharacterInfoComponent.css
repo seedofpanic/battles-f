@@ -1,0 +1,67 @@
+:local(.block) {
+    position: absolute;
+    top: 0;
+    background: black;
+    width: 50%;
+    height: 100%;
+}
+
+:local(.left) {
+    left: 0;
+}
+
+:local(.right) {
+    right: 0;
+}
+
+:local(.portraitBox) {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 50px 200px;
+}
+
+:local(.portrait) {
+    width: 100%;
+    height: 100%;
+    background-position: center top;
+    background-size: cover;
+    background-clip: content-box;
+}
+
+
+:local(.portrait_right) {
+    transform: scaleX(-1);
+}
+
+:local(.hud) {
+    position: absolute;
+    top: 0;
+    background: black;
+}
+
+:local(.hud_left) {
+    left: 0;
+}
+
+:local(.hud_right) {
+    right: 0;
+}
+
+:local(.effect) {
+    background-image: url("https://res.cloudinary.com/dstnxq7wt/image/upload/v1540825337/battle/icons/effects.png");
+    width: 25px;
+    height: 25px;
+    background-size: 250px 250px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+:local(.effect.bleeding) {
+    background-position: -125px 0;
+}
+
+:local(.effect.burning) {
+    background-position: -75px -50px;
+}
