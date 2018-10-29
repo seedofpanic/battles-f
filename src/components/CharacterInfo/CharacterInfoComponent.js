@@ -19,7 +19,7 @@ export class CharacterInfoComponent extends React.Component {
                     <ul>
                         {character.effects.map((effect, index) =>
                             <li key={index} title={effect.name}>
-                                <div className={style.effect + ' ' + (style[effect.id] || '')}></div>
+                                {effect.name}
                                 : {effect.ticks}
                                 </li>
                         )}
