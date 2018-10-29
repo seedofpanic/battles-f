@@ -1,5 +1,5 @@
 import {WSService} from '../../WSService';
 
-export function startBattleAction() {
-    WSService.sendAction('start');
+export function startBattleAction(withBot) {
+    WSService.sendAction('start', {withBot});
 }

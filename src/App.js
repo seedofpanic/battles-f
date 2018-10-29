@@ -33,7 +33,10 @@ class App extends Component {
                                 : ''}
                             {this.props.inBattle ?
                                 '' :
-                                <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
+                                <div>
+                                    <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
+                                    <button className={style.startButton} onClick={() => this.startBattle(true)}>Start AI battle</button>
+                                </div>
                             }
                             <div className={style.mySkillsSelect}>
                                 {this.props.game.skill_select
@@ -52,8 +55,8 @@ class App extends Component {
         );
     }
 
-    startBattle() {
-        startBattleAction();
+    startBattle(withBot) {
+        startBattleAction(withBot);
     }
 }
 
