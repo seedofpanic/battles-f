@@ -3,6 +3,8 @@ import { createStore } from 'redux';
 
 const initGame = {};
 
+export const SET_IN_BATTLE_TYPE = 'set_in_battle';
+
 export const store = createStore(createReducer({
     notes: [],
     game: {
@@ -17,8 +19,9 @@ export const store = createStore(createReducer({
     character_update: characterUpdate,
     set_my_id: setMyId,
     set_opponent_id: setOpponentId,
-    set_in_battle: setInBattle,
-    set_selected_character: setSelectedCharacter
+    [SET_IN_BATTLE_TYPE]: setInBattle,
+    set_selected_character: setSelectedCharacter,
+    cookies: setCookies
 }));
 
 function selectSkill(state, {payload}) {
@@ -129,4 +132,13 @@ function setSelectedCharacter(state, {payload}) {
             selectedId: payload
         }
     };
+}
+
+// TODO: move to effects
+function setCookies(state, {payload}) {
+    payload.forEach(cookie => {
+        document.cookie = `${cookie.key}=${cookie.value}`;
+    });
+
+    return state;
 }

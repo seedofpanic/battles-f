@@ -1,4 +1,4 @@
-import {store} from './store';
+import {onServerMessageHook} from './store/effects/serverHooks';
 
 export class WSService {
     static ws;
@@ -7,7 +7,7 @@ export class WSService {
         this.ws = new WebSocket(`ws://${process.env.REACT_APP_WS_URL}/ws`);
 
         this.ws.onmessage = msg => {
-            store.dispatch(JSON.parse(msg.data));
+            onServerMessageHook(msg.data);
         };
 
         this.ws.onopen = () => {

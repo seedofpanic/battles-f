@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Provider} from 'react-redux';
 import style from './Popups.css';
 import {CharactersSelectComponent} from '../CharactersSelect/CharactersSelectComponent';
-import {store} from '../../store';
+import {store} from '../../store/store';
 
 const popupComponents = {
     'CharactersSelectComponent': CharactersSelectComponent
