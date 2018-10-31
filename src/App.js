@@ -4,6 +4,7 @@ import {NotesComponent} from './components/Notes/NotesComponent';
 import {WSService} from './WSService';
 import {startBattleAction} from './store/actions/startBattleAction';
 import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponent';
+import {CancelFightComponent} from "./components/CancelFight/CancelFightComponent";
 import style from './App.css';
 import {Popups} from './components/Popups/Popups';
 import {CharacterInfoComponent} from './components/CharacterInfo/CharacterInfoComponent';
@@ -38,12 +39,13 @@ class App extends Component {
                                     <button className={style.startButton} onClick={() => this.startBattle(true)}>Start AI battle</button>
                                 </div>
                             }
-                            <div className={style.mySkillsSelect}>
-                                {this.props.game.skill_select
-                                    ? <SkillSelectComponent skills={this.props.game.skill_select}/>
-                                    : ''
-                                }
-                            </div>
+                            {this.props.game.skill_select?
+                                <div className={style.mySkillsSelect}>
+                                    <SkillSelectComponent skills={this.props.game.skill_select}/>
+                                    <CancelFightComponent />
+                                </div>
+                                : ''
+                            }
                             <div className={style.myLog}>
                                 <NotesComponent notes={this.props.notes}/>
                             </div>
