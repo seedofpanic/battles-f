@@ -26,7 +26,8 @@ export const store = createStore(createReducer({
     cookies: setCookies,
     select_unit: selectUnit,
     select_target: selectTarget,
-    set_teams: setTeams
+    set_teams: setTeams,
+    remove_unit: removeUnit
 }));
 
 function selectSkill(state, {payload}) {
@@ -195,7 +196,32 @@ function setTeams(state, {payload}) {
         game: {
             ...state.game,
             myTeam: payload.myTeam,
-            opponentTeam: payload.opponentTeam
+            opponentTeam: payload.opponentTeam,
+            teams: {}
         }
     };
+}
+
+function removeUnit(state, {payload}) {
+    const characters = Object.keys(state.game.teams[payload.team].characters).reduce((result, id) => {
+        if (id !== payload.id) {
+            result[id] = state.game.teams[payload.team].characters[id];
+        }
+
+        return result;
+    }, {});
+
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            teams: {
+                ...state.game.teams,
+                [payload.team]: {
+                    ...state.game.teams[payload.team],
+                    characters: characters
+                }
+            }
+        }
+    }
 }

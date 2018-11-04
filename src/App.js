@@ -66,7 +66,8 @@ class App extends Component {
 
     getTargetId() {
         if (!this.props.game.myTeam ||
-            !this.props.game.teams[this.props.game.myTeam]) {
+            !this.props.game.teams[this.props.game.myTeam] ||
+            !this.props.game.teams[this.props.game.myTeam].characters[this.props.game.selectedCharacterId]) {
             return;
         }
 
