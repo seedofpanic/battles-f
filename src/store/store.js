@@ -23,7 +23,10 @@ export const store = createStore(createReducer({
     set_opponent_id: setOpponentId,
     [SET_IN_BATTLE_TYPE]: setInBattle,
     set_selected_character: setSelectedCharacter,
-    cookies: setCookies
+    cookies: setCookies,
+    select_unit: selectUnit,
+    select_target: selectTarget,
+    set_teams: setTeams
 }));
 
 function selectSkill(state, {payload}) {
@@ -41,7 +44,8 @@ function setMyId(state, {payload}) {
         ...state,
         game: {
             ...state.game,
-            myId: payload
+            myId: payload,
+            selectedCharacterId: payload
         }
     }
 }
@@ -60,6 +64,38 @@ function setOpponentId(state, {payload}) {
     }
 }
 
+function selectUnit(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            selectedCharacterId: payload
+        }
+    }
+}
+
+function selectTarget(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            teams: {
+                ...state.game.teams,
+                [state.game.myTeam]: {
+                    ...state.game.teams[state.game.myTeam],
+                    characters: {
+                        ...state.game.teams[state.game.myTeam].characters,
+                        [state.game.selectedCharacterId]: {
+                            ...state.game.teams[state.game.myTeam].characters[state.game.selectedCharacterId],
+                            targetId: payload
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 function characterUpdate(state, {payload}) {
     const team = state.game.teams[payload.team] || {};
 
@@ -67,8 +103,6 @@ function characterUpdate(state, {payload}) {
         ...state,
         game: {
             ...state.game,
-            myTeam: (payload.id === state.game.myId) ? payload.team : state.game.myTeam,
-            opponentTeam: (state.game.myTeam !== payload.team) ? payload.team : state.game.opponentTeam,
             teams: {
                 ...state.game.teams,
                 [payload.team]: {
@@ -153,4 +187,15 @@ function setCookies(state, {payload}) {
     });
 
     return state;
+}
+
+function setTeams(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            myTeam: payload.myTeam,
+            opponentTeam: payload.opponentTeam
+        }
+    };
 }

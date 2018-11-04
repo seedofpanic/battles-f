@@ -1,4 +1,13 @@
 :local(.block) {
+    border: solid 1px white;
+}
+
+:local(.selected) {
+    border-color: green;
+}
+
+:local(.target) {
+    border-color: red;
 }
 
 :local(.left) {
