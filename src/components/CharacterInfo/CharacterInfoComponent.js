@@ -5,13 +5,19 @@ export class CharacterInfoComponent extends React.Component {
     render() {
         const character = this.props.character;
 
-        return <div className={style[this.props.position] + ' ' + style.block}>
-            <div className={style.portraitBox}>
-                <div className={style['portrait_' + this.props.position] + ' ' + style.portrait}
-                    style={{
-                        backgroundImage: 'url(https://res.cloudinary.com/dstnxq7wt/image/upload/v1540758665/battle/characters/' + character.id + '_full.png)'
-                    }}></div>
-            </div>
+        return <div className={[
+                style[this.props.position],
+                style.block,
+                this.props.isSelected ? style.selected : undefined,
+                this.props.isTargeted ? style.target: undefined
+            ].join(' ')}
+                    onClick={this.props.onSelectUnit}>
+            {/*<div className={style.portraitBox}>*/}
+                {/*<div className={style['portrait_' + this.props.position] + ' ' + style.portrait}*/}
+                    {/*style={{*/}
+                        {/*backgroundImage: 'url(https://res.cloudinary.com/dstnxq7wt/image/upload/v1540758665/battle/characters/' + character.id + '_full.png)'*/}
+                    {/*}}></div>*/}
+            {/*</div>*/}
             <div className={style['hud_' + this.props.position] + ' ' + style.hud}>
                 <div>{character.name}</div>
                 <div>{character.health.toFixed(2)}/{character.healthMax.toFixed(2)}</div>

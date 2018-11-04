@@ -8,6 +8,7 @@ export function onServerMessageHook(data) {
         case SET_IN_BATTLE_TYPE:
             WSService.sendAction('info');
             break;
+        default:
     }
 
     store.dispatch(action);

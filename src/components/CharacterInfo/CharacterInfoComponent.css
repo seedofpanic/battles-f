@@ -1,17 +1,21 @@
 :local(.block) {
-    position: absolute;
-    top: 0;
-    background: black;
-    width: 50%;
-    height: 100%;
+    border: solid 1px white;
+}
+
+:local(.selected) {
+    border-color: green;
+}
+
+:local(.target) {
+    border-color: red;
 }
 
 :local(.left) {
-    left: 0;
+    text-align: left;
 }
 
 :local(.right) {
-    right: 0;
+    text-align: right;
 }
 
 :local(.portraitBox) {
@@ -35,8 +39,7 @@
 }
 
 :local(.hud) {
-    position: absolute;
-    top: 0;
+    display: inline-block;
     background: black;
 }
 

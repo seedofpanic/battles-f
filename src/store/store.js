@@ -1,7 +1,9 @@
 import { createReducer } from 'redux-create-reducer';
 import { createStore } from 'redux';
 
-const initGame = {};
+const initGame = {
+    teams: {}
+};
 
 export const SET_IN_BATTLE_TYPE = 'set_in_battle';
 
@@ -21,7 +23,11 @@ export const store = createStore(createReducer({
     set_opponent_id: setOpponentId,
     [SET_IN_BATTLE_TYPE]: setInBattle,
     set_selected_character: setSelectedCharacter,
-    cookies: setCookies
+    cookies: setCookies,
+    select_unit: selectUnit,
+    select_target: selectTarget,
+    set_teams: setTeams,
+    remove_unit: removeUnit
 }));
 
 function selectSkill(state, {payload}) {
@@ -39,7 +45,8 @@ function setMyId(state, {payload}) {
         ...state,
         game: {
             ...state.game,
-            myId: payload
+            myId: payload,
+            selectedCharacterId: payload
         }
     }
 }
@@ -58,16 +65,56 @@ function setOpponentId(state, {payload}) {
     }
 }
 
-function characterUpdate(state, {payload}) {
+function selectUnit(state, {payload}) {
     return {
         ...state,
         game: {
             ...state.game,
-            characters: {
-                ...state.game.characters,
-                [payload.id]: {
-                    ...(state.game.characters || {[payload.id]: {}})[payload.id],
-                    ...payload.data
+            selectedCharacterId: payload
+        }
+    }
+}
+
+function selectTarget(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            teams: {
+                ...state.game.teams,
+                [state.game.myTeam]: {
+                    ...state.game.teams[state.game.myTeam],
+                    characters: {
+                        ...state.game.teams[state.game.myTeam].characters,
+                        [state.game.selectedCharacterId]: {
+                            ...state.game.teams[state.game.myTeam].characters[state.game.selectedCharacterId],
+                            targetId: payload
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function characterUpdate(state, {payload}) {
+    const team = state.game.teams[payload.team] || {};
+
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            teams: {
+                ...state.game.teams,
+                [payload.team]: {
+                    ...state.game.teams[payload.team],
+                    characters: {
+                        ...team.characters,
+                        [payload.id]: {
+                            ...(team.characters || {})[payload.id],
+                            ...payload.data
+                        }
+                    }
                 }
             }
         }
@@ -141,4 +188,40 @@ function setCookies(state, {payload}) {
     });
 
     return state;
+}
+
+function setTeams(state, {payload}) {
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            myTeam: payload.myTeam,
+            opponentTeam: payload.opponentTeam,
+            teams: {}
+        }
+    };
+}
+
+function removeUnit(state, {payload}) {
+    const characters = Object.keys(state.game.teams[payload.team].characters).reduce((result, id) => {
+        if (id !== payload.id) {
+            result[id] = state.game.teams[payload.team].characters[id];
+        }
+
+        return result;
+    }, {});
+
+    return {
+        ...state,
+        game: {
+            ...state.game,
+            teams: {
+                ...state.game.teams,
+                [payload.team]: {
+                    ...state.game.teams[payload.team],
+                    characters: characters
+                }
+            }
+        }
+    }
 }

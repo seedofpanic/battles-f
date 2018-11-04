@@ -1,0 +1,15 @@
+:local(.block) {
+    position: absolute;
+    top: 0;
+    background: black;
+    width: 50%;
+    height: 100%;
+}
+
+:local(.left) {
+    left: 0;
+}
+
+:local(.right) {
+    right: 0;
+}

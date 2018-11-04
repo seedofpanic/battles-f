@@ -7,8 +7,8 @@ import {SkillSelectComponent} from './components/SkillSelect/SkillSelectComponen
 import {CancelFightComponent} from "./components/CancelFight/CancelFightComponent";
 import style from './App.css';
 import {Popups} from './components/Popups/Popups';
-import {CharacterInfoComponent} from './components/CharacterInfo/CharacterInfoComponent';
 import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
+import {TeamBlockComponent} from './components/TeamBlock/TeamBlockComponent';
 
 class App extends Component {
 
@@ -24,13 +24,16 @@ class App extends Component {
                         <CharactersSelectComponent characters={this.props.game.characters_select}
                                                    selectedId={this.props.game.selectedId}/>
                         : <div className={style.arena}>
-                            {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
-                                <CharacterInfoComponent position='left'
-                                                        character={this.props.game.characters[this.props.game.myId]}/>
+                            {this.props.game.teams && this.props.game.teams[this.props.game.myTeam] ?
+                                <TeamBlockComponent isMyTeam={true}
+                                                    selectedId={this.props.game.selectedCharacterId}
+                                                    team={this.props.game.teams[this.props.game.myTeam]}/>
                                 : ''}
-                            {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
-                                <CharacterInfoComponent position='right'
-                                                        character={this.props.game.characters[this.props.game.opponentId]}/>
+                            {this.props.game.teams && this.props.game.teams[this.props.game.opponentTeam] ?
+                                <TeamBlockComponent isMyTeam={false}
+                                                    selectedId={this.props.game.selectedCharacterId}
+                                                    targetId={this.getTargetId()}
+                                                    team={this.props.game.teams[this.props.game.opponentTeam]}/>
                                 : ''}
                             {this.props.inBattle ?
                                 '' :
@@ -59,6 +62,16 @@ class App extends Component {
 
     startBattle(withBot) {
         startBattleAction(withBot);
+    }
+
+    getTargetId() {
+        if (!this.props.game.myTeam ||
+            !this.props.game.teams[this.props.game.myTeam] ||
+            !this.props.game.teams[this.props.game.myTeam].characters[this.props.game.selectedCharacterId]) {
+            return;
+        }
+
+        return this.props.game.teams[this.props.game.myTeam].characters[this.props.game.selectedCharacterId].targetId;
     }
 }
 
