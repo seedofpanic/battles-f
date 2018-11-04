@@ -9,6 +9,7 @@ import style from './App.css';
 import {Popups} from './components/Popups/Popups';
 import {CharacterInfoComponent} from './components/CharacterInfo/CharacterInfoComponent';
 import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
+import {TeamBlockComponent} from './components/TeamBlock/TeamBlockComponent';
 
 class App extends Component {
 
@@ -24,13 +25,13 @@ class App extends Component {
                         <CharactersSelectComponent characters={this.props.game.characters_select}
                                                    selectedId={this.props.game.selectedId}/>
                         : <div className={style.arena}>
-                            {this.props.game.characters && this.props.game.characters[this.props.game.myId] ?
-                                <CharacterInfoComponent position='left'
-                                                        character={this.props.game.characters[this.props.game.myId]}/>
+                            {this.props.game.teams && this.props.game.teams[this.props.game.myTeam] ?
+                                <TeamBlockComponent position='left'
+                                                    team={this.props.game.teams[this.props.game.myTeam]}/>
                                 : ''}
-                            {this.props.game.characters && this.props.game.characters[this.props.game.opponentId] ?
-                                <CharacterInfoComponent position='right'
-                                                        character={this.props.game.characters[this.props.game.opponentId]}/>
+                            {this.props.game.teams && this.props.game.teams[this.props.game.opponentTeam] ?
+                                <TeamBlockComponent position='right'
+                                                    team={this.props.game.teams[this.props.game.opponentTeam]}/>
                                 : ''}
                             {this.props.inBattle ?
                                 '' :

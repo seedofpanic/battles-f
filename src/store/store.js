@@ -1,7 +1,9 @@
 import { createReducer } from 'redux-create-reducer';
 import { createStore } from 'redux';
 
-const initGame = {};
+const initGame = {
+    teams: {}
+};
 
 export const SET_IN_BATTLE_TYPE = 'set_in_battle';
 
@@ -59,15 +61,25 @@ function setOpponentId(state, {payload}) {
 }
 
 function characterUpdate(state, {payload}) {
+    const team = state.game.teams[payload.team] || {};
+
     return {
         ...state,
         game: {
             ...state.game,
-            characters: {
-                ...state.game.characters,
-                [payload.id]: {
-                    ...(state.game.characters || {[payload.id]: {}})[payload.id],
-                    ...payload.data
+            myTeam: (payload.id === state.game.myId) ? payload.team : state.game.myTeam,
+            opponentTeam: (state.game.myTeam !== payload.team) ? payload.team : state.game.opponentTeam,
+            teams: {
+                ...state.game.teams,
+                [payload.team]: {
+                    ...state.game.teams[payload.team],
+                    characters: {
+                        ...team.characters,
+                        [payload.id]: {
+                            ...(team.characters || {})[payload.id],
+                            ...payload.data
+                        }
+                    }
                 }
             }
         }
