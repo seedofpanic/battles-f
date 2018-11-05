@@ -9,11 +9,18 @@ import style from './App.css';
 import {Popups} from './components/Popups/Popups';
 import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
 import {TeamBlockComponent} from './components/TeamBlock/TeamBlockComponent';
+import {doAction} from "./store/actions";
+import {l10n_helper, SupportedLanguagesEnum} from "./localization/l10n-helper";
+import {SET_GLOBAL_LANG} from "./store/store";
 
 class App extends Component {
 
+    l10n = new l10n_helper();
+
     componentDidMount() {
         WSService.init();
+
+        doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.Ru);
     }
 
     render() {
@@ -38,8 +45,12 @@ class App extends Component {
                             {this.props.inBattle ?
                                 '' :
                                 <div>
-                                    <button className={style.startButton} onClick={() => this.startBattle()}>Start battle</button>
-                                    <button className={style.startButton} onClick={() => this.startBattle(true)}>Start AI battle</button>
+                                    <button className={style.startButton} onClick={() => this.startBattle()} >{
+                                        this.l10n.lang('start_battle')
+                                    }</button>
+                                    <button className={style.startButton} onClick={() => this.startBattle(true)} >{
+                                        this.l10n.lang('start_ai_battle')
+                                    }</button>
                                 </div>
                             }
                             {this.props.game.skill_select?
@@ -55,7 +66,27 @@ class App extends Component {
                         </div>
                 }
                 <Popups popups={this.props.popups}/>
-                <h2 className={style.label}>Pre alpha v0.3</h2>
+
+                <h2 className={style.label}>{
+                    this.l10n.lang('pre_alpha_v0.3')
+                }</h2>
+
+                {
+                    this.props.inBattle ?
+                        '' :
+                        <div className={style.languageSelector}>
+                            <button onClick={() => {
+                                doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.Ru);
+                            }}>
+                                Русский
+                            </button>
+                            <button onClick={() => {
+                                doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.En);
+                            }}>
+                                English
+                            </button>
+                        </div>
+                }
             </div>
         );
     }

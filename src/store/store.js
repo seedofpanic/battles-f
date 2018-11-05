@@ -1,18 +1,25 @@
 import { createReducer } from 'redux-create-reducer';
 import { createStore } from 'redux';
+import { SupportedLanguagesEnum } from "../localization/l10n-helper";
 
 const initGame = {
     teams: {}
 };
 
 export const SET_IN_BATTLE_TYPE = 'set_in_battle';
+export const SET_GLOBAL_LANG = 'set_global_lang';
+
+export function GET_GLOBAL_LANG() {
+    return store.getState().globalLang;
+}
 
 export const store = createStore(createReducer({
     notes: [],
     game: {
         ...initGame
     },
-    popups: []
+    popups: [],
+    globalLang: SupportedLanguagesEnum.Ru,
 }, {
     note: showNote,
     select_character: selectCharacter,
@@ -27,7 +34,8 @@ export const store = createStore(createReducer({
     select_unit: selectUnit,
     select_target: selectTarget,
     set_teams: setTeams,
-    remove_unit: removeUnit
+    remove_unit: removeUnit,
+    [SET_GLOBAL_LANG]: setGlobalLang
 }));
 
 function selectSkill(state, {payload}) {
@@ -224,4 +232,15 @@ function removeUnit(state, {payload}) {
             }
         }
     }
+}
+
+function setGlobalLang(state, {payload}) {
+    if (payload) {
+        return {
+            ...state,
+            globalLang: payload
+        };
+    }
+
+    return state;
 }
