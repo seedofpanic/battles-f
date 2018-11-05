@@ -3,8 +3,8 @@ import {RussianResources} from "./russian-l10n";
 import {EnglishResources} from "./english-l10n";
 
 export const SupportedLanguagesEnum = {
-    "En": 1,
-    "Ru": 2
+    "En": 'en',
+    "Ru": 'ru'
 };
 
 Object.freeze(SupportedLanguagesEnum);

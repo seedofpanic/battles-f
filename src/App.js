@@ -12,6 +12,7 @@ import {TeamBlockComponent} from './components/TeamBlock/TeamBlockComponent';
 import {doAction} from "./store/actions";
 import {l10n_helper, SupportedLanguagesEnum} from "./localization/l10n-helper";
 import {SET_GLOBAL_LANG} from "./store/store";
+import {setLanguageAction} from './store/actions/setLanguageAction';
 
 class App extends Component {
 
@@ -20,7 +21,16 @@ class App extends Component {
     componentDidMount() {
         WSService.init();
 
-        doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.Ru);
+        const cookies = document.cookie.split('; ').reduce((result, cookie) => {
+            const [key, value] = cookie.split('=');
+
+            result[key] = value;
+
+            return result;
+        }, {});
+
+        console.log(cookies);
+        doAction(SET_GLOBAL_LANG, cookies['lang'] || SupportedLanguagesEnum.En);
     }
 
     render() {
@@ -76,12 +86,12 @@ class App extends Component {
                         '' :
                         <div className={style.languageSelector}>
                             <button onClick={() => {
-                                doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.Ru);
+                                setLanguageAction(SupportedLanguagesEnum.Ru);
                             }}>
                                 Русский
                             </button>
                             <button onClick={() => {
-                                doAction(SET_GLOBAL_LANG, SupportedLanguagesEnum.En);
+                                setLanguageAction(SupportedLanguagesEnum.En);
                             }}>
                                 English
                             </button>
