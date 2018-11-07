@@ -42,10 +42,11 @@
 .mySkillsSelect {
   position: absolute;
   left: 0;
-  bottom: 200px;
+  bottom: 45%;
   width: 50%;
   box-sizing: border-box;
   padding: 50px;
+  margin-left:25%;
 }
 
 .languageSelector{
