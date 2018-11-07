@@ -48,17 +48,6 @@
   padding: 50px;
 }
 
-:local(.myLog) {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 50%;
-  height: 180px;
-  padding: 0 50px;
-  box-sizing: border-box;
-  overflow: scroll;
-}
-
 :local(.languageSelector){
   position: absolute;
   bottom: 0;

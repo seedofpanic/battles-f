@@ -29,7 +29,6 @@ class App extends Component {
             return result;
         }, {});
 
-        console.log(cookies);
         doAction(SET_GLOBAL_LANG, cookies['lang'] || SupportedLanguagesEnum.En);
     }
 
@@ -63,16 +62,14 @@ class App extends Component {
                                     }</button>
                                 </div>
                             }
-                            {this.props.game.skill_select?
+                            {this.props.game.skill_select ?
                                 <div className={style.mySkillsSelect}>
                                     <SkillSelectComponent skills={this.props.game.skill_select}/>
                                     <CancelFightComponent />
                                 </div>
                                 : ''
                             }
-                            <div className={style.myLog}>
-                                <NotesComponent notes={this.props.notes}/>
-                            </div>
+                            <NotesComponent notes={this.props.notes}/>
                         </div>
                 }
                 <Popups popups={this.props.popups}/>

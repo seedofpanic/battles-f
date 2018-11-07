@@ -1,0 +1,11 @@
+:local(.panel) {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 50%;
+    height: 50%;
+    padding: 0 5%;
+    box-sizing: border-box;
+    overflow: scroll;
+    transform: translate3d(-50%, 0, 0);
+}
