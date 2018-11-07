@@ -1,31 +1,31 @@
-:local(.block) {
+.block {
     border: solid 1px white;
 }
 
-:local(.selected) {
+.selected {
     border-color: green;
 }
 
-:local(.target) {
+.target {
     border-color: red;
 }
 
-:local(.left) {
+.left {
     text-align: left;
 }
 
-:local(.right) {
+.right {
     text-align: right;
 }
 
-:local(.portraitBox) {
+.portraitBox {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding: 50px 200px;
 }
 
-:local(.portrait) {
+.portrait {
     width: 100%;
     height: 100%;
     background-position: center top;
@@ -34,24 +34,24 @@
 }
 
 
-:local(.portrait_right) {
+.portrait_right {
     transform: scaleX(-1);
 }
 
-:local(.hud) {
+.hud {
     display: inline-block;
     background: black;
 }
 
-:local(.hud_left) {
+.hud_left {
     left: 0;
 }
 
-:local(.hud_right) {
+.hud_right {
     right: 0;
 }
 
-:local(.effect) {
+.effect {
     background-image: url("https://res.cloudinary.com/dstnxq7wt/image/upload/v1540825337/battle/icons/effects.png");
     width: 25px;
     height: 25px;
@@ -61,10 +61,10 @@
     margin-right: 5px;
 }
 
-:local(.effect.bleeding) {
+.effect.bleeding {
     background-position: -125px 0;
 }
 
-:local(.effect.burning) {
+.effect.burning {
     background-position: -75px -50px;
 }

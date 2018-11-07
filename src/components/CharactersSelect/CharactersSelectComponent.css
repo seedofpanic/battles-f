@@ -1,4 +1,4 @@
-:local(.block) {
+.block {
     position: relative;
     background: black;
     width: 100%;
@@ -6,7 +6,7 @@
     text-align: left;
 }
 
-:local(.portraits) {
+.portraits {
     position: absolute;
     left: 0;
     top: 0;
@@ -15,7 +15,7 @@
     box-sizing: border-box;
 }
 
-:local(.info) {
+.info {
     position: absolute;
     right: 0;
     top: 0;
@@ -24,7 +24,7 @@
     box-sizing: border-box;
 }
 
-:local(.portrait) {
+.portrait {
     display: inline-block;
     border: solid 1px white;
     width: 80px;
@@ -35,6 +35,6 @@
     background-position: center;
 }
 
-:local(.selected) {
+.selected {
     border-color: red;
 }

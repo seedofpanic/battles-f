@@ -1,4 +1,4 @@
-:local(.block) {
+.block {
     position: absolute;
     top: 0;
     background: black;
@@ -6,10 +6,10 @@
     height: 100%;
 }
 
-:local(.left) {
+.left {
     left: 0;
 }
 
-:local(.right) {
+.right {
     right: 0;
 }
