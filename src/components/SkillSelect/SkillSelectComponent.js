@@ -6,7 +6,8 @@ export class SkillSelectComponent extends React.Component {
     render() {
         return <div className={style.block}>
             {this.props.skills.map((skill, index) =>
-                <button key={index} onClick={() => this.selectSkill(skill.id)}>{skill.name}</button>)}
+               <a key={index} href="#" className={style.mySelectSkillButton} onClick={() => this.selectSkill(skill.id)}>{skill.name}</a>
+            )}
         </div>;
     }
 
