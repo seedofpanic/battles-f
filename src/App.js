@@ -10,13 +10,12 @@ import {Popups} from './components/Popups/Popups';
 import {CharactersSelectComponent} from './components/CharactersSelect/CharactersSelectComponent';
 import {TeamBlockComponent} from './components/TeamBlock/TeamBlockComponent';
 import {doAction} from "./store/actions";
-import {l10n_helper, SupportedLanguagesEnum} from "./localization/l10n-helper";
+import {SupportedLanguagesEnum} from "./localization/l10n-helper";
 import {SET_GLOBAL_LANG} from "./store/store";
 import {setLanguageAction} from './store/actions/setLanguageAction';
+import l10n_instance from "./localization/l10n-helper";
 
 class App extends Component {
-
-    l10n = new l10n_helper();
 
     componentDidMount() {
         WSService.init();
@@ -55,10 +54,10 @@ class App extends Component {
                                 '' :
                                 <div>
                                     <button className={style.startButton} onClick={() => this.startBattle()} >{
-                                        this.l10n.lang('start_battle')
+                                        l10n_instance.lang('start_battle')
                                     }</button>
                                     <button className={style.startButton} onClick={() => this.startBattle(true)} >{
-                                        this.l10n.lang('start_ai_battle')
+                                        l10n_instance.lang('start_ai_battle')
                                     }</button>
                                 </div>
                             }
@@ -75,7 +74,7 @@ class App extends Component {
                 <Popups popups={this.props.popups}/>
 
                 <h2 className={style.label}>{
-                    this.l10n.lang('pre_alpha_v0.3')
+                    l10n_instance.lang('pre_alpha_v0.3')
                 }</h2>
 
                 {

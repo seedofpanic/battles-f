@@ -9,7 +9,7 @@ export const SupportedLanguagesEnum = {
 
 Object.freeze(SupportedLanguagesEnum);
 
-export class l10n_helper {
+class l10n_helper {
     lang(key) {
         const language = GET_GLOBAL_LANG();
 
@@ -27,3 +27,8 @@ export class l10n_helper {
         return noKeyMessage;
     }
 };
+
+const l10n_instance = new l10n_helper();
+Object.freeze(l10n_instance);
+
+export default l10n_instance;
