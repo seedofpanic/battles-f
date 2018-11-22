@@ -21,6 +21,9 @@ export class WSService {
                 this.ws.onopen = () => {
                     this.sendAction('info');
                 };
+            })
+            .catch(err => {
+                console.log(err);
             });
     }
 

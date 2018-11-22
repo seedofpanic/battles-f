@@ -5,6 +5,8 @@ import {store} from "./store/store";
 import {Provider} from "react-redux";
 import {Server} from 'mock-socket';
 
+fetch = () => Promise.reject('Requests are blocked in tests');
+
 beforeEach(() => {
     const mockServer = new Server('ws://battle.mobmind.ru:3003/ws');
 
