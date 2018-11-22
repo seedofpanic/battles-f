@@ -35,7 +35,8 @@ export const store = createStore(createReducer({
     select_target: selectTarget,
     set_teams: setTeams,
     remove_unit: removeUnit,
-    [SET_GLOBAL_LANG]: setGlobalLang
+    [SET_GLOBAL_LANG]: setGlobalLang,
+    set_auth: setAuth
 }));
 
 function selectSkill(state, {payload}) {
@@ -243,4 +244,11 @@ function setGlobalLang(state, {payload}) {
     }
 
     return state;
+}
+
+function setAuth(state, {payload}) {
+    return {
+        ...state,
+        auth: payload
+    }
 }

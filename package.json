@@ -50,7 +50,7 @@
   },
   "scripts": {
     "start": "cross-env REACT_APP_WS_URL=\"battle.mobmind.ru:3003\" node scripts/start.js",
-    "local": "cross-env REACT_APP_WS_URL=\"localhost:3003\" node scripts/start.js",
+    "local": "cross-env REACT_APP_WS_URL=\"localhost:3000\" node scripts/start.js",
     "build": "cross-env REACT_APP_WS_URL=\"battle.mobmind.ru:3003\" node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -98,5 +98,17 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "proxy": {
+    "/ws": {
+      "target": "http://localhost:3003",
+      "ws": true
+    },
+    "/auth": {
+      "target": "http://localhost:3003"
+    },
+    "/test": {
+      "target": "http://localhost:3003"
+    }
   }
 }

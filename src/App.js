@@ -34,6 +34,21 @@ class App extends Component {
     render() {
         return (
             <div className={style.App}>
+                <header>
+                    {this.props.auth ?
+                        <div>
+                            <a href={`http://${process.env.REACT_APP_WS_URL}/auth/logout`}>
+                                log out
+                            </a>
+                        </div>
+                        : <div>
+                            <a href={`http://${process.env.REACT_APP_WS_URL}/auth/facebook`}>
+                                <img className={style.loginButton}
+                                     src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
+                            </a>
+                        </div>
+                    }
+                </header>
                 {
                     this.props.game.characters_select ?
                         <CharactersSelectComponent characters={this.props.game.characters_select}
