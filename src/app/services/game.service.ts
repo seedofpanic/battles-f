@@ -13,10 +13,10 @@ export class GameService {
     opponentTeamId: string;
     auth: boolean;
     charactersSelect: { [name: string]: ICharacter };
-    skillSelect: ISkill[];
-    isSkillSelect: boolean;
     teams: {[name: string]: ITeam};
     skills: ISkill;
+    selectedCharacterId: string;
+    targetsIds: {[name: string]: string} = {};
 
     private myId: number;
 
@@ -45,7 +45,10 @@ export class GameService {
                 this.charactersSelect = action.payload;
                 break;
             case 'character_update':
-                this.teams[action.payload.team].characters[action.payload.id] = action.payload.data;
+                this.teams[action.payload.team].characters[action.payload.id] = {
+                    ...this.teams[action.payload.team].characters[action.payload.id],
+                    ...action.payload.data
+                };
                 break;
             case 'select_skill':
                 this.skills = action.payload;
@@ -76,7 +79,25 @@ export class GameService {
     }
 
     selectSkill(skill: ISkill) {
-        this.apiService.sendAction('select_skill', skill.id)
+        this.apiService.sendAction('select_skill', skill.id);
         this.skills = null;
+    }
+
+    setSelectedCharacter(selectedId: string) {
+        this.selectedCharacterId = selectedId;
+    }
+
+    setTarget(targetId: string) {
+        if (this.selectedCharacterId && this.targetsIds[this.selectedCharacterId] !== targetId) {
+            this.targetsIds[this.selectedCharacterId] = targetId;
+            this.apiService.sendAction('select_target', {
+                unitId: this.selectedCharacterId,
+                targetId
+            });
+        }
+    }
+
+    cancelFight() {
+        this.apiService.sendAction('cancel_fight', {});
     }
 }

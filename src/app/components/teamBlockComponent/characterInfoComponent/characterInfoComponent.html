@@ -1,8 +1,6 @@
 <div [class.left]="position === 'left'"
      [class.right]="position === 'right'"
      class="block"
-     [class.selected]="isSelected"
-     [class.target]="isTargeted"
      (click)="onSelectUnit()">
 </div>
 <div [ngClass]="'hud_' + position" class="hud">

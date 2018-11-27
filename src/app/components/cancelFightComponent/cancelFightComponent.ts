@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {GameService} from '../../services/game.service';
 
 @Component({
     selector: 'cancelFightComponent',
@@ -7,7 +8,10 @@ import {Component} from '@angular/core';
 })
 export class CancelFightComponent {
 
-    cancelFight() {
+    constructor(private gameService: GameService) {
+    }
 
+    cancelFight() {
+        this.gameService.cancelFight();
     }
 }

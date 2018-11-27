@@ -4,9 +4,9 @@
      [class.right]="!isMyTeam"
 >
     <characterInfoComponent *ngFor="let characterId of getCharactersKeys()"
-                            onSelectUnit="selectUnit(characterId)"
+                            [class.selected]="characterId === gameService.selectedCharacterId"
+                            [class.targeted]="characterId === gameService.targetsIds[gameService.selectedCharacterId]"
+                            (click)="selectUnit(characterId)"
                             [position]="position"
-                            [isSelected]="characterId === selectedId"
-                            [isTargeted]="characterId === targetId"
                             [character]="characters[characterId]"></characterInfoComponent>
 </div>

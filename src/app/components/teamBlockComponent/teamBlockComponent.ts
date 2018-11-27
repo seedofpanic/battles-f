@@ -9,8 +9,6 @@ import {GameService} from '../../services/game.service';
 })
 export class TeamBlockComponent implements OnChanges {
     @Input() isMyTeam: boolean;
-    @Input() selectedId: string;
-    @Input() targetId: string;
     @Input() teamId: string;
     @Input() position: string;
 
@@ -27,5 +25,13 @@ export class TeamBlockComponent implements OnChanges {
 
     getCharactersKeys() {
         return Object.keys(this.characters);
+    }
+
+    selectUnit(selectedId: string) {
+        if (this.isMyTeam) {
+            this.gameService.setSelectedCharacter(selectedId);
+        } else {
+            this.gameService.setTarget(selectedId);
+        }
     }
 }

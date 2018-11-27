@@ -15,10 +15,8 @@
                            [characters]="gameService.charactersSelect"></charactersSelectComponent>
 <div class="arena" *ngIf="!gameService.charactersSelect">
     <teamBlockComponent [isMyTeam]="true"
-                        [selectedId]="selectedCharacterId"
                         [teamId]="gameService.myTeamId"></teamBlockComponent>
     <teamBlockComponent [isMyTeam]="false"
-                        [selectedId]="selectedCharacterId"
                         [teamId]="gameService.opponentTeamId"></teamBlockComponent>
     <div *ngIf="!gameService.isBattle">
         <button class="start-button" (click)="startBattle()">Start</button>
