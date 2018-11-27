@@ -45,9 +45,9 @@ jobs:
                       ssh ${HOST_NAME}  << EOF
                         cd ${HOST_DIR}
                         git pull
-                        yarn i
+                        npm i
                         rm -rf ${PUBLIC_DIR}
-                        yarn run build
+                        npm run build
                         cp -r dist/* ${PUBLIC_DIR}
                     EOF
                     fi
