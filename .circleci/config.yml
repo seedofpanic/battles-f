@@ -46,7 +46,7 @@ jobs:
                         cd ${HOST_DIR}
                         git pull
                         npm i
-                        rm -rf ${PUBLIC_DIR}
+                        rm -rf ${PUBLIC_DIR}/*
                         npm run build
                         cp -r dist/* ${PUBLIC_DIR}
                     EOF
