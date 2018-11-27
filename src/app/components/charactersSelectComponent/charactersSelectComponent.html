@@ -1,0 +1,12 @@
+<div class="block">
+    <div class="portraits">
+        <div *ngFor="let character of characters" [class.portrait]="true"
+        [class.selected]="selectedCharacter === character"
+        (click)="setSelected(character)"
+        [style.backgroundImage]="'url(https://res.cloudinary.com/dstnxq7wt/image/upload/v1540758665/battle/characters/' + character.id + '.png)'"
+        ></div>
+    </div>
+</div>
+<div class="info">
+    <selectedCharacterComponent [character]="selectedCharacter"></selectedCharacterComponent>
+</div>

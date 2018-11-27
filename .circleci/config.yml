@@ -34,7 +34,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn run test
+      # s- run: yarn run test
 
       - deploy:
                 name: Staging Deploy
@@ -42,10 +42,14 @@ jobs:
                     if [ "${CIRCLE_BRANCH}" == "master" ]; then
                       echo "${HOST_KEY}" >> ~/.ssh/known_hosts
 
-                      ssh ${HOST_NAME} "cd ${HOST_DIR};git pull"
-                      ssh ${HOST_NAME} "cd ${HOST_DIR};npm i"
-                      ssh ${HOST_NAME} "cd ${HOST_DIR};npm run build"
-                      ssh ${HOST_NAME} "cp -r ${HOST_DIR}/build/* ${PUBLIC_DIR}"
+                      ssh ${HOST_NAME}  << EOF
+                        cd ${HOST_DIR}
+                        git pull
+                        yarn i
+                        rm -rf dist
+                        yarn run build
+                        cp -r dist/* ${PUBLIC_DIR}
+                    EOF
                     fi
 
 

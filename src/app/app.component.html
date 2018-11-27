@@ -1,0 +1,33 @@
+<header>
+    <div *ngIf="gameService.auth">
+        <a [href]='logoutUrl'>
+            log out
+        </a>
+    </div>
+    <div *ngIf="!gameService.auth">
+        <a [href]='fbLoginUrl'>
+            <img class="login-button"
+                 src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
+        </a>
+    </div>
+</header>
+<charactersSelectComponent *ngIf="gameService.charactersSelect"
+                           [characters]="gameService.charactersSelect"></charactersSelectComponent>
+<div class="arena" *ngIf="!gameService.charactersSelect">
+    <teamBlockComponent [isMyTeam]="true"
+                        [selectedId]="selectedCharacterId"
+                        [teamId]="gameService.myTeamId"></teamBlockComponent>
+    <teamBlockComponent [isMyTeam]="false"
+                        [selectedId]="selectedCharacterId"
+                        [teamId]="gameService.opponentTeamId"></teamBlockComponent>
+    <div *ngIf="!gameService.isBattle">
+        <button class="start-button" (click)="startBattle()">Start</button>
+        <button class="start-button" (click)="startBattle(true)">Start AI</button>
+    </div>
+    <div *ngIf="gameService.isBattle" class="skills-select">
+        <skillSelectComponent *ngIf="gameService.skills" [skills]="gameService.skills"></skillSelectComponent>
+        <cancelFightComponent></cancelFightComponent>
+    </div>
+    <notesComponent></notesComponent>
+</div>
+<!--<Popups popups="popups"/>-->

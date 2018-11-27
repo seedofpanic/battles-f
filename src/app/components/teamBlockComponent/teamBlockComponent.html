@@ -1,0 +1,12 @@
+<div *ngIf="characters"
+     class="block"
+     [class.left]="isMyTeam"
+     [class.right]="!isMyTeam"
+>
+    <characterInfoComponent *ngFor="let characterId of getCharactersKeys()"
+                            onSelectUnit="selectUnit(characterId)"
+                            [position]="position"
+                            [isSelected]="characterId === selectedId"
+                            [isTargeted]="characterId === targetId"
+                            [character]="characters[characterId]"></characterInfoComponent>
+</div>

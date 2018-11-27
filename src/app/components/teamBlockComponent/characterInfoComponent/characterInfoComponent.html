@@ -1,0 +1,17 @@
+<div [class.left]="position === 'left'"
+     [class.right]="position === 'right'"
+     class="block"
+     [class.selected]="isSelected"
+     [class.target]="isTargeted"
+     (click)="onSelectUnit()">
+</div>
+<div [ngClass]="'hud_' + position" class="hud">
+    <div>{{character.name}}</div>
+    <div>{{character.health.toFixed(2)}}/{{character.healthMax.toFixed(2)}}</div>
+    <ul *ngIf="character.effects">
+        <li *ngFor="let effect of character.effects" [attr.title]="effect.name">
+            {{effect.name}}
+            : {{effect.ticks}}
+        </li>
+    </ul>
+</div>

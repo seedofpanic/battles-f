@@ -1,9 +1,0 @@
-.popup {
-    position: fixed;
-    max-width: 80%;
-    max-height: 80%;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    text-align: left;
-}
