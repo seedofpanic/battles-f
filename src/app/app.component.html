@@ -1,15 +1,18 @@
 <header>
-    <div *ngIf="gameService.auth">
-        <a [href]='logoutUrl'>
-            log out
-        </a>
+    <div *ngIf="!gameService.isBattle">
+        <div *ngIf="gameService.auth">
+            <a [href]='logoutUrl'>
+                log out
+            </a>
+        </div>
+        <div *ngIf="!gameService.auth">
+            <a [href]='fbLoginUrl'>
+                <img class="login-button"
+                     src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
+            </a>
+        </div>
     </div>
-    <div *ngIf="!gameService.auth">
-        <a [href]='fbLoginUrl'>
-            <img class="login-button"
-                 src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
-        </a>
-    </div>
+    <timerComponent></timerComponent>
 </header>
 <charactersSelectComponent *ngIf="gameService.charactersSelect"
                            [characters]="gameService.charactersSelect"></charactersSelectComponent>
@@ -19,7 +22,7 @@
     <teamBlockComponent [isMyTeam]="false"
                         [teamId]="gameService.opponentTeamId"></teamBlockComponent>
     <div *ngIf="!gameService.isBattle">
-        <button class="start-button" (click)="startBattle()">Start</button>
+        <button class="start-button" (click)="startBattle(false)">Start</button>
         <button class="start-button" (click)="startBattle(true)">Start AI</button>
     </div>
     <div *ngIf="gameService.isBattle" class="skills-select">

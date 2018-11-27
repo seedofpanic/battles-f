@@ -4,6 +4,7 @@ import {IAction} from '../models/IAction';
 import {ICharacter} from '../models/ICharacter';
 import {ISkill} from '../models/ISkill';
 import {ITeam} from '../models/ITeam';
+import {TimerService} from './timer.service';
 
 @Injectable()
 export class GameService {
@@ -20,7 +21,7 @@ export class GameService {
 
     private myId: number;
 
-    constructor(private apiService: APIService) {
+    constructor(private apiService: APIService, private timerService: TimerService) {
         this.apiService.subscribe(action => this.onServerAction(action))
     }
 
@@ -52,6 +53,13 @@ export class GameService {
                 break;
             case 'select_skill':
                 this.skills = action.payload;
+
+                if (this.isBattle) {
+                    this.charactersSelect = null;
+                }
+                break;
+            case 'show_timer':
+                this.timerService.start(action.payload);
                 break;
         }
     }

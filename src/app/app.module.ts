@@ -10,6 +10,7 @@ import {NotesModule} from './components/notesComponent/notesModule';
 import {APIService} from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {GameService} from './services/game.service';
+import {TimerModule} from './components/timerComponent/timerModule';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import {GameService} from './services/game.service';
         SkillSelectModule,
         TeamBlockModule,
         CancelFightModule,
-        NotesModule
+        NotesModule,
+        TimerModule
     ],
     providers: [APIService, GameService],
     bootstrap: [AppComponent]
