@@ -46,7 +46,7 @@ jobs:
                         cd ${HOST_DIR}
                         git pull
                         yarn i
-                        rm -rf dist
+                        rm -rf ${PUBLIC_DIR}
                         yarn run build
                         cp -r dist/* ${PUBLIC_DIR}
                     EOF
