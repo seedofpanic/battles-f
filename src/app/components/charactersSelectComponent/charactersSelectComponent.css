@@ -24,15 +24,21 @@
     box-sizing: border-box;
 }
 
-.portrait {
+.portrait-box {
     display: inline-block;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.portrait {
     border: solid 1px white;
     width: 80px;
     height: 100px;
-    margin-right: 20px;
-    margin-bottom: 20px;
     background-size: cover;
     background-position: center;
+    margin-bottom: 10px;
 }
 
 .selected {
