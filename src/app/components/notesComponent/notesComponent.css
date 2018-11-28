@@ -1,11 +1,18 @@
-.panel {
-    position:absolute;
-    width:50%;
-    height:40%;
-    bottom:0;
-    margin-left:25%;
+:host {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 40%;
+    bottom: 0;
     padding: 0 5%;
     box-sizing: border-box;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+@media all and (max-width: 600px) {
+    :host {
+        position: static;
+        width: 100%;
+    }
 }

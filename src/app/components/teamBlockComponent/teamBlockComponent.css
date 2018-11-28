@@ -18,6 +18,7 @@
 
 .right {
     right: 0;
+    text-align: right;
 }
 
 .selected {
@@ -26,4 +27,19 @@
 
 .targeted {
     border: solid 1px red;
+}
+
+@media all and (max-width: 600px) {
+    :host {
+        position: static;
+        display: inline-block;
+        width: 50%;
+        font-size: medium;
+    }
+
+    .block {
+        width: 50%;
+        height: auto;
+        position: static;
+    }
 }

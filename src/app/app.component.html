@@ -17,10 +17,12 @@
 <charactersSelectComponent *ngIf="gameService.charactersSelect"
                            [characters]="gameService.charactersSelect"></charactersSelectComponent>
 <div class="arena" *ngIf="!gameService.charactersSelect">
-    <teamBlockComponent [isMyTeam]="true"
-                        [teamId]="gameService.myTeamId"></teamBlockComponent>
-    <teamBlockComponent [isMyTeam]="false"
-                        [teamId]="gameService.opponentTeamId"></teamBlockComponent>
+    <div class="teams">
+        <teamBlockComponent [isMyTeam]="true"
+                            [teamId]="gameService.myTeamId"></teamBlockComponent>
+        <teamBlockComponent [isMyTeam]="false"
+                            [teamId]="gameService.opponentTeamId"></teamBlockComponent>
+    </div>
     <div *ngIf="!gameService.isBattle">
         <button class="start-button" (click)="startBattle(false)">Start</button>
         <button class="start-button" (click)="startBattle(true)">Start AI</button>
