@@ -35,10 +35,11 @@
         display: inline-block;
         width: 50%;
         font-size: medium;
+        vertical-align: top;
     }
 
     .block {
-        width: 50%;
+        width: 100%;
         height: auto;
         position: static;
     }
