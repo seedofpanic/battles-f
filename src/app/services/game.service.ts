@@ -38,6 +38,9 @@ export class GameService {
                 break;
             case 'set_in_battle':
                 this.isBattle = action.payload;
+                if (!this.isBattle) {
+                    this.apiService.sendAction('info', '');
+                }
                 break;
             case 'set_teams':
                 this.setTeams(action.payload);
