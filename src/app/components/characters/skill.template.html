@@ -1,0 +1,5 @@
+<div [ngClass]="type">
+    <div class="title">{{title}}</div>
+    <div class="description" [innerHTML]="description" *ngIf="!full"></div>
+    <div class="description" [innerHTML]="fullDescription" *ngIf="full"></div>
+</div>

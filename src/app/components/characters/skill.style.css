@@ -1,0 +1,19 @@
+.attack .title {
+    color: red;
+}
+
+.heal .title {
+    color: green;
+}
+
+.buff .title {
+    color: blue;
+}
+
+.debuff .title {
+    color: yellow;
+}
+
+.summon .title {
+    color: purple;
+}

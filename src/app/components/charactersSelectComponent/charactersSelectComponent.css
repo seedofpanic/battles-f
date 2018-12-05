@@ -26,6 +26,7 @@
 
 .portrait-box {
     display: inline-block;
+    width: 80px;
     margin-bottom: 20px;
     margin-right: 20px;
     font-size: 15px;
