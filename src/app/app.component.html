@@ -1,36 +1,37 @@
-<header>
-    <div *ngIf="!gameService.isBattle">
-        <div *ngIf="gameService.auth">
-            <a [href]='logoutUrl'>
-                log out
-            </a>
+<div class="rpgui-container framed-grey full">
+    <charactersSelectComponent *ngIf="gameService.charactersSelect"
+                               [characters]="gameService.charactersSelect"></charactersSelectComponent>
+    <div class="arena" *ngIf="!gameService.charactersSelect">
+        <div class="teams">
+            <teamBlockComponent [isMyTeam]="true"
+                                [teamId]="gameService.myTeamId"></teamBlockComponent>
+            <teamBlockComponent [isMyTeam]="false"
+                                [teamId]="gameService.opponentTeamId"></teamBlockComponent>
         </div>
-        <div *ngIf="!gameService.auth">
-            <a [href]='fbLoginUrl'>
-                <img class="login-button"
-                     src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
-            </a>
+        <div *ngIf="!gameService.isBattle">
+            <div *ngIf="!gameService.auth">
+                <a [href]='fbLoginUrl'>
+                    <img class="login-button"
+                         src="https://res.cloudinary.com/dstnxq7wt/image/upload/v1542921478/battle/facebook-sign-in-button.png"/>
+                </a>
+            </div>
+            <div>
+                <button class="rpgui-button" (click)="startBattle(false)">Start</button>
+            </div>
+            <div>
+                <button class="rpgui-button" (click)="startBattle(true)">Start AI</button>
+            </div>
+            <div *ngIf="gameService.auth">
+                <a class="rpgui-button" [href]='logoutUrl'>
+                    log out
+                </a>
+            </div>
         </div>
+        <div *ngIf="gameService.isBattle" class="skills-select">
+            <skillSelectComponent *ngIf="gameService.skills" [skills]="gameService.skills"></skillSelectComponent>
+            <cancelFightComponent></cancelFightComponent>
+        </div>
+        <notesComponent class="rpgui-container framed"></notesComponent>
     </div>
-    <timerComponent class="timer"></timerComponent>
-</header>
-<charactersSelectComponent *ngIf="gameService.charactersSelect"
-                           [characters]="gameService.charactersSelect"></charactersSelectComponent>
-<div class="arena" *ngIf="!gameService.charactersSelect">
-    <div class="teams">
-        <teamBlockComponent [isMyTeam]="true"
-                            [teamId]="gameService.myTeamId"></teamBlockComponent>
-        <teamBlockComponent [isMyTeam]="false"
-                            [teamId]="gameService.opponentTeamId"></teamBlockComponent>
-    </div>
-    <div *ngIf="!gameService.isBattle">
-        <button class="start-button" (click)="startBattle(false)">Start</button>
-        <button class="start-button" (click)="startBattle(true)">Start AI</button>
-    </div>
-    <div *ngIf="gameService.isBattle" class="skills-select">
-        <skillSelectComponent *ngIf="gameService.skills" [skills]="gameService.skills"></skillSelectComponent>
-        <cancelFightComponent></cancelFightComponent>
-    </div>
-    <notesComponent></notesComponent>
+    <!--<Popups popups="popups"/>-->
 </div>
-<!--<Popups popups="popups"/>-->

@@ -3,10 +3,12 @@
      [class.left]="isMyTeam"
      [class.right]="!isMyTeam"
 >
-    <characterInfoComponent *ngFor="let characterId of getCharactersKeys()"
-                            [class.selected]="characterId === gameService.selectedCharacterId"
-                            [class.targeted]="characterId === gameService.targetsIds[gameService.selectedCharacterId]"
-                            (click)="selectUnit(characterId)"
-                            [position]="position"
-                            [character]="characters[characterId]"></characterInfoComponent>
+    <div class="inset-block rpgui-container framed">
+        <characterInfoComponent *ngFor="let characterId of getCharactersKeys()"
+                                [class.selected]="characterId === gameService.selectedCharacterId"
+                                [class.targeted]="characterId === gameService.targetsIds[gameService.selectedCharacterId]"
+                                (click)="selectUnit(characterId)"
+                                [position]="position"
+                                [character]="characters[characterId]"></characterInfoComponent>
+    </div>
 </div>

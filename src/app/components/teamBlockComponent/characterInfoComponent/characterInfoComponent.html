@@ -4,8 +4,16 @@
      (click)="onSelectUnit()">
 </div>
 <div [ngClass]="'hud_' + position" class="hud">
-    <div>{{character.name}}</div>
+    <h2>{{character.name}}</h2>
+    <hr>
     <div>{{character.health.toFixed(2)}}/{{character.healthMax.toFixed(2)}}</div>
+    <div class="bar">
+        <div class="rpgui-progress-track">
+            <div class="rpgui-progress-fill red" [style.width]="(character.health / character.healthMax * 100) + '%'"></div>
+        </div>
+        <div class="rpgui-progress-left-edge"></div>
+        <div class="rpgui-progress-right-edge"></div>
+    </div>
     <ul *ngIf="character.effects">
         <li *ngFor="let effect of character.effects" [attr.title]="effect.name">
             {{effect.name}}

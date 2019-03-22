@@ -46,6 +46,10 @@
     border-color: red;
 }
 
+.name {
+    font-size: 9px;
+}
+
 @media all and (max-width: 600px) {
     .portraits {
         position: relative;
