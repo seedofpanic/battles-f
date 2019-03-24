@@ -2,6 +2,7 @@
     <charactersSelectComponent *ngIf="gameService.charactersSelect"
                                [characters]="gameService.charactersSelect"></charactersSelectComponent>
     <div class="arena" *ngIf="!gameService.charactersSelect">
+        <div *ngIf="gameService.duelLink" class="duel-link">{{gameService.duelLink}}</div>
         <timerComponent></timerComponent>
         <div class="teams">
             <teamBlockComponent *ngIf="gameService.myTeamId"
@@ -22,6 +23,9 @@
                 <button class="rpgui-button" (click)="startBattle(false)">Start</button>
             </div>
             <div>
+                <button class="rpgui-button" (click)="startBattle(false, true)">Invite to duel</button>
+            </div>
+            <div>
                 <button class="rpgui-button" (click)="startBattle(true)">Start AI</button>
             </div>
             <div *ngIf="gameService.auth">
@@ -36,5 +40,6 @@
         </div>
         <notesComponent class="rpgui-container framed"></notesComponent>
     </div>
+    <router-outlet></router-outlet>
     <!--<Popups popups="popups"/>-->
 </div>

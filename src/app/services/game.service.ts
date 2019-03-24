@@ -19,8 +19,11 @@ export class GameService {
     selectedCharacterId: string;
     targetsIds: {[name: string]: string} = {};
     withBot: boolean;
+    withLink: boolean;
+    duelLink: string;
 
     private myId: number;
+    combatId: string;
 
     constructor(private apiService: APIService, private timerService: TimerService) {
         this.apiService.subscribe(action => this.onServerAction(action))
@@ -43,6 +46,9 @@ export class GameService {
                     this.timerService.stop();
                     this.apiService.sendAction('info', '');
                 }
+                break;
+            case 'duel_link':
+                this.duelLink = action.payload;
                 break;
             case 'set_teams':
                 this.setTeams(action.payload);
@@ -67,7 +73,7 @@ export class GameService {
                 this.timerService.start(action.payload);
                 break;
             case 'character_selected':
-                this.start(this.withBot);
+                this.start();
                 break;
         }
     }
@@ -85,12 +91,22 @@ export class GameService {
         };
     }
 
-    start(withBot: boolean) {
-        this.apiService.sendAction('start', {withBot});
+    start() {
+        if (this.withLink) {
+            if (this.combatId) {
+                this.apiService.sendAction('join', {combatId: this.combatId});
+            } else {
+                this.apiService.sendAction('invite', {});
+            }
+        } else {
+            this.apiService.sendAction('start', {withBot: this.withBot});
+        }
     }
 
-    getCharacterList(withBot: boolean) {
+    getCharacterList(withBot: boolean, withLink: boolean) {
         this.withBot = withBot;
+        this.withLink = withLink;
+        console.log('send');
         this.apiService.sendAction('get_character_list', null);
     }
 
@@ -120,5 +136,9 @@ export class GameService {
 
     cancelFight() {
         this.apiService.sendAction('cancel_fight', {});
+    }
+
+    join() {
+        this.apiService.sendAction('join', this.duelLink);
     }
 }

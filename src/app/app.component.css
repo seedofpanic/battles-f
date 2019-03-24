@@ -72,6 +72,10 @@
     min-height: 20px;
 }
 
+.duel-link {
+    user-select: all;
+}
+
 @media all and (max-width: 600px) {
     .arena {
         width: 100%;

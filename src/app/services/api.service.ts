@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, Subject} from 'rxjs';
+import {Observable, of, ReplaySubject, Subject} from 'rxjs';
 import {IAction} from '../models/IAction';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
@@ -7,7 +7,7 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class APIService extends Subject<IAction> {
-    ws: WebSocket;
+    ws$ = new ReplaySubject<WebSocket>(1);
 
     constructor(private httpClient: HttpClient) {
         super();
@@ -21,13 +21,19 @@ export class APIService extends Subject<IAction> {
                     payload: result.auth
                 });
 
-                this.ws = new WebSocket(`ws://${environment.WS_URL}/ws`);
+                const ws = new WebSocket(`ws://${environment.WS_URL}/ws`);
 
-                this.ws.onmessage = msg => {
+                ws.onmessage = msg => {
                     this.next(JSON.parse(msg.data));
                 };
 
-                this.ws.onopen = () => {
+                ws.onerror = msg => {
+                    throw msg;
+                };
+
+                ws.onopen = () => {
+                    console.log('open');
+                    this.ws$.next(ws);
                     this.sendAction('info', '');
                 };
             });
@@ -43,6 +49,8 @@ export class APIService extends Subject<IAction> {
     }
 
     sendAction(type, payload) {
-        this.ws.send(JSON.stringify({type, payload}));
+        this.ws$.subscribe(ws => {
+            ws.send(JSON.stringify({type, payload}));
+        })
     }
 }

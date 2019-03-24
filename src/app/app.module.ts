@@ -11,12 +11,17 @@ import {APIService} from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {GameService} from './services/game.service';
 import {TimerModule} from './components/timerComponent/timerModule';
+import {RouterModule} from '@angular/router';
+import {appRoutes} from './app.router';
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
+        RouterModule.forRoot(
+            appRoutes
+        ),
         BrowserModule,
         HttpClientModule,
         CharactersSelectModule,
