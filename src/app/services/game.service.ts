@@ -106,7 +106,6 @@ export class GameService {
     getCharacterList(withBot: boolean, withLink: boolean) {
         this.withBot = withBot;
         this.withLink = withLink;
-        console.log('send');
         this.apiService.sendAction('get_character_list', null);
     }
 

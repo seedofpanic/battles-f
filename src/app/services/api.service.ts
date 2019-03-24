@@ -32,7 +32,6 @@ export class APIService extends Subject<IAction> {
                 };
 
                 ws.onopen = () => {
-                    console.log('open');
                     this.ws$.next(ws);
                     this.sendAction('info', '');
                 };

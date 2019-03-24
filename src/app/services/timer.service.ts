@@ -30,7 +30,6 @@ export class TimerService {
             this.stop();
             this.timer = diff;
             this.timerId = setTimeout(() => {
-                console.log('continue ' + this.timerId);
                 this.updateTimer();
             }, 1000);
         } else {
