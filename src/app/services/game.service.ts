@@ -3,8 +3,8 @@ import {APIService} from './api.service';
 import {IAction} from '../models/IAction';
 import {ICharacter} from '../models/ICharacter';
 import {ISkill} from '../models/ISkill';
-import {ITeam} from '../models/ITeam';
 import {TimerService} from './timer.service';
+import {ITeam} from '../models/ITeam';
 
 @Injectable()
 export class GameService {
@@ -14,10 +14,11 @@ export class GameService {
     opponentTeamId: string;
     auth: boolean;
     charactersSelect: { [name: string]: ICharacter };
-    teams: {[name: string]: ITeam};
     skills: ISkill;
+    teams: {[name: string]: ITeam};
     selectedCharacterId: string;
     targetsIds: {[name: string]: string} = {};
+    withBot: boolean;
 
     private myId: number;
 
@@ -39,6 +40,7 @@ export class GameService {
             case 'set_in_battle':
                 this.isBattle = action.payload;
                 if (!this.isBattle) {
+                    this.timerService.stop();
                     this.apiService.sendAction('info', '');
                 }
                 break;
@@ -64,10 +66,15 @@ export class GameService {
             case 'show_timer':
                 this.timerService.start(action.payload);
                 break;
+            case 'character_selected':
+                this.start(this.withBot);
+                break;
         }
     }
 
     private setTeams({myTeam, opponentTeam}) {
+        this.myTeamId = myTeam;
+        this.opponentTeamId = opponentTeam;
         this.teams = {
             [myTeam]: {
                 characters: {}
@@ -76,12 +83,15 @@ export class GameService {
                 characters: {}
             }
         };
-        this.myTeamId = myTeam;
-        this.opponentTeamId = opponentTeam;
     }
 
     start(withBot: boolean) {
         this.apiService.sendAction('start', {withBot});
+    }
+
+    getCharacterList(withBot: boolean) {
+        this.withBot = withBot;
+        this.apiService.sendAction('get_character_list', null);
     }
 
     selectCharacter(character: ICharacter) {

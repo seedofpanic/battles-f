@@ -1,4 +1,4 @@
-<div *ngIf="characters"
+<div *ngIf="this.characters"
      class="block"
      [class.left]="isMyTeam"
      [class.right]="!isMyTeam"
@@ -9,6 +9,6 @@
                                 [class.targeted]="characterId === gameService.targetsIds[gameService.selectedCharacterId]"
                                 (click)="selectUnit(characterId)"
                                 [position]="position"
-                                [character]="characters[characterId]"></characterInfoComponent>
+                                [character]="this.characters[characterId]"></characterInfoComponent>
     </div>
 </div>

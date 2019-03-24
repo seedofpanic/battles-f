@@ -9,7 +9,7 @@ import {GameService} from '../../services/game.service';
 })
 export class TeamBlockComponent implements OnChanges {
     @Input() isMyTeam: boolean;
-    @Input() teamId: string;
+    @Input() team: string;
     @Input() position: string;
 
     characters: {[name: string]: ICharacter};
@@ -17,9 +17,9 @@ export class TeamBlockComponent implements OnChanges {
     constructor(public gameService: GameService) {
     }
 
-    ngOnChanges({teamId}: SimpleChanges): void {
-        if (teamId && teamId.currentValue) {
-            this.characters = this.gameService.teams[teamId.currentValue].characters;
+    ngOnChanges({team}: SimpleChanges): void {
+        if (team && team.currentValue) {
+            this.characters = team.currentValue.characters;
         }
     }
 

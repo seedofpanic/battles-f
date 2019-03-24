@@ -2,11 +2,14 @@
     <charactersSelectComponent *ngIf="gameService.charactersSelect"
                                [characters]="gameService.charactersSelect"></charactersSelectComponent>
     <div class="arena" *ngIf="!gameService.charactersSelect">
+        <timerComponent></timerComponent>
         <div class="teams">
-            <teamBlockComponent [isMyTeam]="true"
-                                [teamId]="gameService.myTeamId"></teamBlockComponent>
-            <teamBlockComponent [isMyTeam]="false"
-                                [teamId]="gameService.opponentTeamId"></teamBlockComponent>
+            <teamBlockComponent *ngIf="gameService.myTeamId"
+                                [isMyTeam]="true"
+                                [team]="gameService.teams[gameService.myTeamId]"></teamBlockComponent>
+            <teamBlockComponent *ngIf="gameService.opponentTeamId"
+                                [isMyTeam]="false"
+                                [team]="gameService.teams[gameService.opponentTeamId]"></teamBlockComponent>
         </div>
         <div *ngIf="!gameService.isBattle">
             <div *ngIf="!gameService.auth">

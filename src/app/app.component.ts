@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ICharacter} from './models/ICharacter';
 import {GameService} from './services/game.service';
 
 @Component({
@@ -10,15 +9,13 @@ import {GameService} from './services/game.service';
 export class AppComponent {
     fbLoginUrl = '/auth/facebook';
     logoutUrl = '/auth/logout';
-    charactersSelect: ICharacter[];
-    selectedId: number;
-    selectedCharacterId: number;
+    withBot: boolean;
 
     constructor(public gameService: GameService) {
 
     }
 
     startBattle(withBot: boolean) {
-        this.gameService.start(withBot)
+        this.gameService.getCharacterList(withBot);
     }
 }
